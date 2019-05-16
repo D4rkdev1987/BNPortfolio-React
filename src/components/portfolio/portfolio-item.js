@@ -1,14 +1,49 @@
-import React from "react";
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-export default function(props) {
+export default class PortfolioItem extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      portfolioItemClass: ""
+    };
+  }
+  //methods below that handle events
+  handleMouseEnter() {
+    this.setState({ portfolioItemClass: "image-blur" });
+  }
+
+  handleMouseLeave() {
+    this.setState({ portfolioItemClass: "" });
+  }
+  
+  render() {
+    const { id, description, thumb_image_url, logo_url } = this.props.item;
     return (
-        <div>
-            <h3>{props.title}</h3>
-            <h4>{props.url}</h4>
+     <div
+      className="portfolio-item-wrapper"
+      //below JS event listener-mouse event the parens and arrow function are there -don't run code until event occurs
+      onMouseEnter={() => this.handleMouseEnter()}
+      onMouseLeave={() => this.handleMouseLeave()}
+     >
+      <div
+        className={
+          "portfolio-img-background " + this.state.portfolioItemClass
+        }
+        style={{
+          backgroundImage: "url(" + thumb_image_url + ")"
+        }}
+      />
+    
+      <div className="img-text-wrapper">
+          <div className="logo-wrapper">
+            <img src={logo_url} />
+          </div>
 
-            <Link to={`/portfolio/${props.slug}`}>Link</Link>
-
-        </div>
+        <div className="subtitle">{description}</div>
+      </div>
+    </div>
     );
+  }
 }

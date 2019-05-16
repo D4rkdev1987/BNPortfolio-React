@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import moment from "moment";
 import axios from 'axios';
 import {
   BrowserRouter as Router,
@@ -14,36 +13,19 @@ import About from "./pages/about";
 import Contact from "./pages/contact";
 import Blog from "./pages/blog";
 import PortfolioDetail from "./portfolio/portfolio-detail";
+import Auth from "./pages/auth";
 import NoMatch from "./pages/no-match";
 
 export default class App extends Component {
-  constructor() {
-    super();
-
-    this.getPortfolioItems = this.getPortfolioItems.bind(this);
-  }
-
-  getPortfolioItems() {
-    axios
-      .get("https://benjaminnicklaus.devcamp.space/portfolio/portfolio_items")
-      .then(response => {
-        console.log("response data", response);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
   render() {
-    this.getPortfolioItems();
     return (
-      <div className="app">
+      <div className="container">
         <Router>
           <div>
-            <h1>Shakeria Smith Portfolio</h1>
-            <div>{moment().format("MMMM Do YYYY, h:mm:ss a")}</div>
             <NavigationContainer />
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route path="/auth" component={Auth} />
               <Route path="/about-me" component={About} />
               <Route path="/contact" component={Contact} />
               <Route path="/blog" component={Blog} />

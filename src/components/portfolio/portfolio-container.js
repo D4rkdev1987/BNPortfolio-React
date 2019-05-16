@@ -4,6 +4,7 @@ import axios from 'axios';
 import PortfolioItem from './portfolio-item';
 
 export default class PortfolioContainer extends Component {
+    
     constructor() {
       super();
   
@@ -42,9 +43,7 @@ export default class PortfolioContainer extends Component {
         return (
           <PortfolioItem
             key={item.id}
-            title={item.name}
-            url={item.url}
-            slug={item.id}
+            item={item}
           />
         );
       });
@@ -60,21 +59,20 @@ export default class PortfolioContainer extends Component {
       }
   
       return (
-        <div>
-          <h2>{this.state.pageTitle}</h2>
+          <div className='portfolio-items-wrapper'>
+            <button className='btn' onClick={() => this.handleFilter("Disney")}>
+                Disney
+            </button>
+            <button className='btn' onClick={() => this.handleFilter("kids")}>
+                Kids
+            </button>
+            <button className='btn' onClick={() => this.handleFilter("Family")}>
+                Family
+            </button>
+          
+            {this.portfolioItems()}
+          </div>         
   
-          <button onClick={() => this.handleFilter("eCommerce")}>
-            eCommerce
-          </button>
-          <button onClick={() => this.handleFilter("Scheduling")}>
-            Scheduling
-          </button>
-          <button onClick={() => this.handleFilter("Enterprise")}>
-            Enterprise
-          </button>
-  
-          {this.portfolioItems()}
-        </div>
       );
     }
   }
