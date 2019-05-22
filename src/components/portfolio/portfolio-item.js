@@ -9,7 +9,7 @@ export default class PortfolioItem extends Component {
       portfolioItemClass: ""
     };
   }
-  //methods below that handle events
+
   handleMouseEnter() {
     this.setState({ portfolioItemClass: "image-blur" });
   }
@@ -17,33 +17,32 @@ export default class PortfolioItem extends Component {
   handleMouseLeave() {
     this.setState({ portfolioItemClass: "" });
   }
-  
+
   render() {
     const { id, description, thumb_image_url, logo_url } = this.props.item;
     return (
-     <div
-      className="portfolio-item-wrapper"
-      //below JS event listener-mouse event the parens and arrow function are there -don't run code until event occurs
-      onMouseEnter={() => this.handleMouseEnter()}
-      onMouseLeave={() => this.handleMouseLeave()}
-     >
       <div
-        className={
-          "portfolio-img-background " + this.state.portfolioItemClass
-        }
-        style={{
-          backgroundImage: "url(" + thumb_image_url + ")"
-        }}
-      />
-    
-      <div className="img-text-wrapper">
+        className="portfolio-item-wrapper"
+        onMouseEnter={() => this.handleMouseEnter()}
+        onMouseLeave={() => this.handleMouseLeave()}
+      >
+        <div
+          className={
+            "portfolio-img-background " + this.state.portfolioItemClass
+          }
+          style={{
+            backgroundImage: "url(" + thumb_image_url + ")"
+          }}
+        />
+
+        <div className="img-text-wrapper">
           <div className="logo-wrapper">
             <img src={logo_url} />
           </div>
 
-        <div className="subtitle">{description}</div>
+          <div className="subtitle">{description}</div>
+        </div>
       </div>
-    </div>
     );
   }
 }
